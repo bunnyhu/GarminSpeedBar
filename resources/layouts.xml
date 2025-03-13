@@ -1,0 +1,12 @@
+<layouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <!-- A generic, centered layout. -->
+    <layout id="MainLayout">
+        <drawable class="Background" />
+        <drawable id="w_compass" class="WindCompass">
+        <param name="locX">150</param>
+        <param name="locY">80</param>        
+        <param name="height">80</param>
+        <param name="font">Gfx.FONT_XTINY</param>
+        </drawable>
+    </layout>
+</layouts>

@@ -1,0 +1,6 @@
+<resources>
+    <!-- default datas with Edge 1050 setting, use device resource files! -->
+    <jsonData id="SimulatorFontPaddings">[0, 0, 0, 0, 1, 12, 14, 19, 23]</jsonData>
+	<jsonData id="DeviceFontPaddings">[0, 0, 0, 0, 1, 12, 14, 19, 23]</jsonData>
+    <jsonData id="fontSizes">[21, 28, 33, 38, 61, 71, 82, 109, 136]</jsonData>
+</resources>
