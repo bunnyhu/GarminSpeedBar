@@ -1,12 +1,16 @@
 <layouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
-    <!-- A generic, centered layout. -->
+    <!-- A generic layout. -->
     <layout id="MainLayout">
         <drawable class="Background" />
         <drawable id="w_compass" class="WindCompass">
-        <param name="locX">150</param>
+        <param name="locX">dc.getWidth() - 60</param>
         <param name="locY">80</param>        
-        <param name="height">80</param>
+        <param name="height">60</param>
         <param name="font">Gfx.FONT_XTINY</param>
+        <param name="showLabel">2</param>
         </drawable>
+        <label id="speed" x="250" y="center" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="Graphics.FONT_NUMBER_THAI_HOT" color="Graphics.COLOR_BLACK" text="00"/>
+        <label id="speedLabel" x="270" y="center" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_TINY" color="Graphics.COLOR_BLACK" text="Km\nh"/>
     </layout>
+
 </layouts>
