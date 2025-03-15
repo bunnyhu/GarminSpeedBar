@@ -81,7 +81,7 @@ class WindCompass extends Toybox.WatchUi.Drawable {
 
 
     //! setting the unique parameters 
-    //! :heading, :font, :pen
+    //! :heading, :font, :pen :wind :pen :showLabel
     function setParams(options) as Void {
         if (options[:heading]!=null) {
             setHeading(options[:heading]);

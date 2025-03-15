@@ -13,7 +13,7 @@ class SpeedbarFieldView extends WatchUi.DataField {
     var _sensors;           // calculated sensor data
     var _sizeOK;            // DataField size fit for my app
     var _mps;               // km/h or Mi/h
-    var _colorizeLabels = ["speedLabel"];
+    var _colorizeLabels = ["speedLabel", "avgSpeed"];
 
     // current speed colors [ok, little slow, real slow]
     var speedColors = [Graphics.COLOR_DK_GREEN, Graphics.COLOR_YELLOW, Graphics.COLOR_RED];
@@ -44,6 +44,7 @@ class SpeedbarFieldView extends WatchUi.DataField {
             View.setLayout(Rez.Layouts.MainLayout(dc));
             _align.reAlignWithFont(findDrawableById("speed") as Text, Gfx.FONT_NUMBER_THAI_HOT);
             _align.reAlignWithFont(findDrawableById("speedLabel") as Text, Gfx.FONT_TINY);
+            _align.reAlignWithFont(findDrawableById("avgSpeed") as Text, Gfx.FONT_SMALL);
             _sizeOK = true;            
         }
     }
@@ -88,13 +89,18 @@ class SpeedbarFieldView extends WatchUi.DataField {
                 (findDrawableById(_colorizeLabels[f]) as Text).setColor( numColor );
             }
 
-            var wc = findDrawableById("w_compass") as WindCompass;
+            var wc = View.findDrawableById("w_compass") as WindCompass;
             wc.setHeading(_sensors[:heading]);
             wc.labelColor = numColor;
             if (_sensors[:windDir] != null) {
                 wc.setWind(_sensors[:windDir]);
             }
             drawSpeed(numColor);
+            (View.findDrawableById("visualAvg") as VisualAvg).setParams({
+                :actual =>  _sensors[:speed],
+                :average => _sensors[:avgSpeed]
+            });
+            (View.findDrawableById("avgSpeed") as Text).setText(_sensors[:avgSpeed].format("%0.1f")+ "");
         }
         View.onUpdate(dc);  // update the layouts, do it BEFORE extra drawing !!!!!!!
     }
