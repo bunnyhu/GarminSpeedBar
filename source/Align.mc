@@ -34,7 +34,12 @@ class Align {
         // System.println("Loading simulator font paddings");
         return WatchUi.loadResource(Rez.JsonData.SimulatorFontPaddings);
     }
-    
+
+    //! Text Y padding realign
+    function reAlignWithFont(item as Text, _font as Number) {
+            item.locY = item.locY - paddings[_font];
+    }
+
     //! Text Y padding realign
     function reAlign(item as Text) {
             item.locY = item.locY - paddings[font];

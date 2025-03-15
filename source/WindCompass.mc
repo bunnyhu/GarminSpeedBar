@@ -41,7 +41,7 @@ class WindCompass extends Toybox.WatchUi.Drawable {
     private var labelFont = Gfx.FONT_XTINY;
 
     var arrowColor = Gfx.COLOR_RED;
-    var circleColor = Gfx.COLOR_GREEN;
+    var circleColor = Gfx.COLOR_LT_GRAY;
     var circleBackground = Gfx.COLOR_WHITE;
     var labelColor = Gfx.COLOR_BLACK;
 
@@ -197,21 +197,21 @@ class WindCompass extends Toybox.WatchUi.Drawable {
     //! draw circle
     function drawCircle(dc as Gfx.Dc) as Void {
         // white bg stroke circle area
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
-        dc.fillCircle(locX, locY, circleR);
+        // dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+        // dc.fillCircle(locX, locY, circleR);
 
         dc.setColor(circleColor, circleBackground);
         dc.setPenWidth(2);
 
         if (windDirection == null) {
-            dc.drawCircle(locX, locY, circleR+2);
+            dc.drawCircle(locX, locY, circleR+4);
         } else {
             var windArc = getWindArcs();
             dc.setPenWidth(2);
-            dc.drawArc(locX, locY, circleR, Graphics.ARC_CLOCKWISE , windArc[:cb], windArc[:ce]);
+            dc.drawArc(locX, locY, circleR+4, Graphics.ARC_CLOCKWISE , windArc[:cb], windArc[:ce]);
             dc.setPenWidth(circlePen);
             dc.setColor(Graphics.COLOR_PURPLE, circleBackground);
-            dc.drawArc(locX, locY, circleR, Graphics.ARC_COUNTER_CLOCKWISE , windArc[:wb], windArc[:we]);
+            dc.drawArc(locX, locY, circleR+4, Graphics.ARC_COUNTER_CLOCKWISE , windArc[:wb], windArc[:we]);
         }
     }
 
