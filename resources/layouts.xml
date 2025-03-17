@@ -3,23 +3,23 @@
     <layout id="MainLayout">
         <drawable class="Background" />
         <drawable id="w_compass" class="WindCompass">
-        <param name="locX">dc.getWidth() - 60</param>
-        <param name="locY">70</param>        
-        <param name="height">60</param>
-        <param name="font">Gfx.FONT_XTINY</param>
-        <param name="showLabel">2</param>
+            <param name="locX">dc.getWidth() - 80</param>
+            <param name="locY">70</param>        
+            <param name="height">60</param>
+            <param name="showLabel">2</param>
         </drawable>
         <label id="speed" x="250" y="20" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="Graphics.FONT_NUMBER_THAI_HOT" color="Graphics.COLOR_BLACK" text="00"/>
         <label id="speedLabel" x="270" y="20" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_TINY" color="Graphics.COLOR_BLACK" text="Km\nh"/>
         <drawable id="visualAvg" class="VisualAvg">
-        <param name="locX">20</param>
-        <param name="locY">120</param>
-        <param name="width">320</param>
-        <param name="height">35</param>
+            <param name="locX">20</param>
+            <param name="locY">120</param>
+            <param name="width">320</param>
+            <param name="height">35</param>
         </drawable>
         <label id="avgSpeed" x="360" y="125" justification="Graphics.TEXT_JUSTIFY_LEFT" font="Graphics.FONT_SMALL" color="Graphics.COLOR_BLACK" text="00"/>
     </layout>
     <layout id="TooSmallLayout">
+    <drawable class="Background" />
     <label id="error" x="center" y="center" justification="Graphics.TEXT_JUSTIFY_CENTER" font="Graphics.FONT_TINY" color="Graphics.COLOR_RED" text="Only full width"/>
     </layout>
 </layouts>

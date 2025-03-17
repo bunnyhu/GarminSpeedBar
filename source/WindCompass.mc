@@ -35,17 +35,21 @@ class WindCompass extends Toybox.WatchUi.Drawable {
     private var currentHeading;     // radians
     private var northRadian;        // radians
     private var windDirection;      // radians
+    private var radarSpeed;
+    private var radarDanger;
     private var circleR;
     private var showLabel = 1;      // 0 - none, 1 - numeric heading, 2 - short heading text
     private var labelHeight = 21;
     private var labelFont = Gfx.FONT_XTINY;
+    private var radarFont = Gfx.FONT_MEDIUM;
+    private var radarFontYOffset = 5;
 
     var arrowColor = Gfx.COLOR_RED;
     var circleColor = Gfx.COLOR_LT_GRAY;
     var circleBackground = Gfx.COLOR_WHITE;
     var labelColor = Gfx.COLOR_BLACK;
-
-    var circlePen = 10;
+    var radarPen = 15;
+    var windPen = 10;
     var fontSizes = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // Edge1050
     var points = [      // arrow corners in 4x4 matrix, 0;0 center
         [  0, -2],
@@ -81,23 +85,32 @@ class WindCompass extends Toybox.WatchUi.Drawable {
 
 
     //! setting the unique parameters 
-    //! :heading, :font, :pen :wind :pen :showLabel
+    //! :heading :font :wind :showLabel
     function setParams(options) as Void {
         if (options[:heading]!=null) {
             setHeading(options[:heading]);
         }
         if (options[:wind]!=null) {
             setWind(options[:wind]);
+        }        
+        if (options[:compassFont]!=null) {
+            labelFont = options[:compassFont];
         }
-        if (options[:font]!=null) {
-            labelFont = options[:font];
+        if (options[:radarFont]!=null) {
+            radarFont = options[:radarFont];
         }
-        if (options[:pen]!=null) {
-            circlePen = options[:pen];
+        if (options[:radarPen]!=null) {
+            radarPen = options[:radarPen];
+        }
+        if (options[:windPen]!=null) {
+            windPen = options[:windPen];
         }
         if (options[:showLabel]!=null) {
             showLabel = options[:showLabel];
         }
+        if (options[:radarFontYOffset]!=null) {
+            radarFontYOffset = options[:radarFontYOffset];
+        }        
         resetAll();
     }
 
@@ -119,6 +132,11 @@ class WindCompass extends Toybox.WatchUi.Drawable {
         windDirection = Math.toRadians(p_wind);
     }
 
+
+    function setRadar(p_speed, p_danger) as Void {
+        radarSpeed = p_speed;
+        radarDanger = p_danger;
+    }
 
     //! Get compass 1/8 direction number, 0 - North CW
     function getDirection(pHeadingValue) as Number {
@@ -153,9 +171,13 @@ class WindCompass extends Toybox.WatchUi.Drawable {
 
 
     function draw(dc as Gfx.Dc) as Void {
-        drawCircle(dc);
-        drawArrow(dc);
-        drawLabel(dc);
+        if ((radarSpeed != null) && (radarSpeed>0)) {
+            drawRadar(dc);
+        } else {
+            drawCircle(dc);
+            drawArrow(dc);
+            drawLabel(dc);
+        }
     }
 
 
@@ -169,7 +191,7 @@ class WindCompass extends Toybox.WatchUi.Drawable {
         } else if (showLabel == 2) {
             label = (currentHeading) ? _directionTexts[getDirection(Math.toDegrees(currentHeading))] : "--";
         }
-        var y = locY-circleR-(circlePen/2)-labelHeight-5;
+        var y = locY-circleR-labelHeight-10;
         dc.setColor(labelColor, Gfx.COLOR_TRANSPARENT);
         dc.drawText(locX, _padding.reAlignY(y, labelFont), labelFont, label, Gfx.TEXT_JUSTIFY_CENTER );
     }
@@ -209,10 +231,26 @@ class WindCompass extends Toybox.WatchUi.Drawable {
             var windArc = getWindArcs();
             dc.setPenWidth(2);
             dc.drawArc(locX, locY, circleR+4, Graphics.ARC_CLOCKWISE , windArc[:cb], windArc[:ce]);
-            dc.setPenWidth(circlePen);
+            dc.setPenWidth(windPen);
             dc.setColor(Graphics.COLOR_PURPLE, circleBackground);
             dc.drawArc(locX, locY, circleR+4, Graphics.ARC_COUNTER_CLOCKWISE , windArc[:wb], windArc[:we]);
         }
     }
 
+    //! draw Radar speed sign
+    function drawRadar(dc as Gfx.Dc) as Void {
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+        dc.fillCircle(locX, locY, circleR + 4);
+        if (radarDanger == 1) {
+            dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_WHITE);    
+        } else if (radarDanger == 2) {
+            dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_WHITE);    
+        } else {
+            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_WHITE);
+        }
+        dc.setPenWidth(radarPen);        
+        dc.drawCircle(locX, locY, circleR+(radarPen/2));
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(locX, _padding.reAlignY(locY-(fontSizes[radarFont]/2)+radarFontYOffset, radarFont), radarFont, radarSpeed.format("%u"), Graphics.TEXT_JUSTIFY_CENTER);
+    }
 }
