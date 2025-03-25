@@ -26,7 +26,7 @@ This is a garmin Edge cycling computer extended speed datafield. It working only
 * If we have radar and vehicle(s) arriving, it show the fastest one's speed. If the speed moderate the number in a green circle, the ok speed means yellow and the fast one with red circle. After the vehicle passed, it turn back to compass.
 
 ## Install from Garmin store
-https://apps.garmin.com/
+https://apps.garmin.com/apps/78396c21-0ddd-4d5c-9cf3-0a311750d3f4
 
 ## Manual install
 * Download the latest version from Github Releases section and unpack it. https://github.com/bunnyhu/ExtendedSpeedBar/releases
