@@ -1,6 +1,6 @@
 # Bunny's extended speedbar datafield
-![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/bunnyhu/ExtendedSpeedBar/latest/total)
-![Github stable release](https://img.shields.io/packagist/v/bunnyhu/ExtendedSpeedBar?label=Stable)
+![GitHub Release](https://img.shields.io/github/v/release/bunnyhu/ExtendedSpeedBar)
+![GitHub Release Date](https://img.shields.io/github/release-date/bunnyhu/ExtendedSpeedBar)
 
 **Extended speed datafield for Garmin Edge 1050**
 
