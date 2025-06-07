@@ -29,9 +29,13 @@ class MyBikeRadarListener extends AntPlus.BikeRadarListener {
 }
 
 
-// ********************************
-// Main DF Class
-// ********************************
+/*
+    Bunny's extended speedbar datafield
+
+    @author Karoly Szabo (Bunny)
+    @version 1.0.1
+    @link https://github.com/bunnyhu/GarminSpeedBar
+*/
 class SpeedbarFieldView extends WatchUi.DataField {
     private var _radarListener;
     private var _radar = null;    
@@ -69,6 +73,7 @@ class SpeedbarFieldView extends WatchUi.DataField {
                 :speedS => "mi\nh",
             };
         }
+        resetSensors();
     }
 
 

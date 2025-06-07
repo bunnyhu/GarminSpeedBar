@@ -1,5 +1,5 @@
 project.manifest = manifest.xml
 
 # device: s   ,    sim: d
-excludeBase=d
+excludeBase=s
 base.excludeAnnotations = $(excludeBase) 

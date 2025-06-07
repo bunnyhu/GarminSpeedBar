@@ -38,4 +38,5 @@ https://apps.garmin.com/apps/78396c21-0ddd-4d5c-9cf3-0a311750d3f4
 https://github.com/bunnyhu/GarminSpeedBar
 
 ## History
+v1.0.1    Possible resolve the crash after install. 2025. jun. 7.
 v1.0.0    Initial release.  2025. marc. 16.
